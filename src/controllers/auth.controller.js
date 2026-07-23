@@ -53,6 +53,20 @@ export const signup =  async(req ,res)=>{
 }
 
 export const login =  async(req , res)=>{
+  const {email , password} = req.body;
+
+  try {
+     const user = await User.findOne({email});
+
+     if(!user){
+       return res.status(400).json({message:"Invlid credentials"})
+     }
+
+    const isPasswordCorrect = await bcrypt.compaaare(password, user.password)
+
+  } catch (error) {
+    
+  }
   
 }
 export const logout =  async(req , res)=>{
