@@ -20,7 +20,26 @@ export const signup =  async(req ,res)=>{
        }
         const salt = await bcrypt.genSalt(10);
 
-        const
+        const hshedPassword = await bcrypt.hash(password , salt);
+
+        const newUser = new user({
+          fullName,
+          email,
+          password:hshedPassword,
+        })
+
+        if(newUser){
+          generateToken(newUser._id , res);
+          await newUser.save();
+
+          res.status(201).json({
+            _id:newUser._id,
+            fullName:newUser.fullName,
+            email:newUser.email,
+            profilePic:newUser.profilePic,
+
+          })
+        }
 
      } catch (error) {
       
