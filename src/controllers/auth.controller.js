@@ -1,4 +1,6 @@
-import bcrypt from "bcryptjs"
+import bcrypt from "bcryptjs";
+import User from "../models/user.model.js";
+import { generateToken } from "../utils/utils.js";
 
 
 export const signup =  async(req ,res)=>{
@@ -22,7 +24,7 @@ export const signup =  async(req ,res)=>{
 
         const hshedPassword = await bcrypt.hash(password , salt);
 
-        const newUser = new user({
+        const newUser = new User({
           fullName,
           email,
           password:hshedPassword,
