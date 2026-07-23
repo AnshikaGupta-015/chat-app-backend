@@ -8,14 +8,14 @@ export const signup =  async(req ,res)=>{
 
      try {
        if(!fullName || !email || !password) {
-          return res.status(400).json({Message:"All fields are required"});
+          return res.status(400).json({message:"All fields are required"});
        }
 
        if(password.length < 6){
-        return res.status(400).json({Message:"Password must be atleast 6 characters long"});
+        return res.status(400).json({message:"Password must be atleast 6 characters long"});
        } 
 
-       const user = await UserActivation.findOne({email});
+       const user = await User.findOne({email});
 
        if(user){
           return res.status(400).json({Message:"User Already exists with this email"});
@@ -42,9 +42,13 @@ export const signup =  async(req ,res)=>{
 
           })
         }
+        else{
+          res.status(400).json({message:"Invalid user data"});
+        }
 
      } catch (error) {
-      
+      console.log("Error in signup controller: ",error.message);
+      res.status(500).json({messaage:"Internal server error"});
      }
 }
 
