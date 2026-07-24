@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import User from "../models/user.model.js";
 import { generateToken } from "../utils/utils.js";
+import cloudinary from "../lib/cloudinaaary.js"
 
 
 export const signup =  async(req ,res)=>{
@@ -97,6 +98,16 @@ export const logout =  async(req , res)=>{
   
 }
 export const updateProfile =  async(req , res)=>{
-  
+  try {
+    const {profilePic} = req. body;
+
+    const userId = req.user._id;
+    
+    if(profilePic){
+       return res.status(400).json({messaage:"Profile pitcture is required"});
+    }
+  } catch (error) {
+    
+  }
 }
 
