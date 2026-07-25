@@ -6,6 +6,7 @@ import cors from "cors";
 
 import { connectDB } from "./lib/db.js";
 import authRoutes from "./routes/auth.route.js";
+import messageRoutes from "./routes/message.routes.js"
 
 
 dotenv.config();
@@ -28,6 +29,7 @@ app.use(
 
 //ROUTES
 app.use("/api/auth" , authRoutes);
+app.use("/api/messages" , messageRoutes);
 
 app.listen(PORT, ()=>{
   console.log(`server is running on port ${PORT}`);
