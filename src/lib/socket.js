@@ -6,4 +6,10 @@ const app = express();
 
 const server = http.createServer(app);
 
-const io = new Server(server)
+const io = new Server(server);
+
+
+
+io.on("connection", (socket)=>{
+  console.log("user Connected" , socket.id)
+})
